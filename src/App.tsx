@@ -1,12 +1,22 @@
 import React, { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
-import * as THREE from "three";
 
 // Atom Component
-const Atom = ({ position, color, size, type, onClick }: { position: [number, number, number]; color: string; size: number; type: string; onClick: () => void;}) => {
+const Atom = ({
+  position,
+  color,
+  size,
+  onClick,
+}: {
+  position: [number, number, number];
+  color: string;
+  size: number;
+  type: string;
+  onClick: () => void;
+}) => {
   return (
-    <mesh position={position} onClick={onClick}> 
+    <mesh position={position} onClick={onClick}>
       <sphereGeometry args={[size, 32, 32]} />
       <meshStandardMaterial color={color} />
     </mesh>
@@ -14,29 +24,69 @@ const Atom = ({ position, color, size, type, onClick }: { position: [number, num
 };
 
 // FCC Unit Cell Generator
-const FCCStructure = ({ type, onSelect }: { type: "Cu" | "NaCl" | "MgO"; onSelect: (ion: string) => void }) => {
+const FCCStructure = ({
+  type,
+  onSelect,
+}: {
+  type: "Cu" | "NaCl" | "MgO";
+  onSelect: (ion: string) => void;
+}) => {
   const unitCellSize = 1.5;
-  const colors = { Cu: "orange", Na: "grey", Cl: "lightblue", Mg: "red", O: "white" };
+  const colors = {
+    Cu: "orange",
+    Na: "grey",
+    Cl: "lightblue",
+    Mg: "red",
+    O: "white",
+  };
 
   // FCC Lattice Points
   const fccPoints: [number, number, number][] = [
-    [0, 0, 0], [unitCellSize, 0, 0], [0, unitCellSize, 0], [0, 0, unitCellSize],
-    [unitCellSize, unitCellSize, 0], [unitCellSize, 0, unitCellSize], [0, unitCellSize, unitCellSize],
-    [unitCellSize, unitCellSize, unitCellSize], [unitCellSize / 2, unitCellSize / 2, 0],
-    [unitCellSize / 2, 0, unitCellSize / 2], [0, unitCellSize / 2, unitCellSize / 2], [unitCellSize / 2, unitCellSize, unitCellSize / 2],
-    [unitCellSize / 2, unitCellSize / 2, unitCellSize], [unitCellSize, unitCellSize / 2, unitCellSize / 2]
+    [0, 0, 0],
+    [unitCellSize, 0, 0],
+    [0, unitCellSize, 0],
+    [0, 0, unitCellSize],
+    [unitCellSize, unitCellSize, 0],
+    [unitCellSize, 0, unitCellSize],
+    [0, unitCellSize, unitCellSize],
+    [unitCellSize, unitCellSize, unitCellSize],
+    [unitCellSize / 2, unitCellSize / 2, 0],
+    [unitCellSize / 2, 0, unitCellSize / 2],
+    [0, unitCellSize / 2, unitCellSize / 2],
+    [unitCellSize / 2, unitCellSize, unitCellSize / 2],
+    [unitCellSize / 2, unitCellSize / 2, unitCellSize],
+    [unitCellSize, unitCellSize / 2, unitCellSize / 2],
   ];
 
   // Interweaving Offsets
   const interweavingPoints: [number, number, number][] = [
-    [unitCellSize / 2, 0, 0], [unitCellSize, unitCellSize / 2, 0], [0, unitCellSize / 2, 0], [unitCellSize / 2, unitCellSize, 0],
-    [unitCellSize, 0, unitCellSize / 2], [0, 0, unitCellSize / 2], [0, unitCellSize, unitCellSize / 2], [unitCellSize, unitCellSize, unitCellSize / 2], [ unitCellSize / 2, unitCellSize / 2, unitCellSize / 2],
-    [unitCellSize / 2, 0, unitCellSize], [unitCellSize, unitCellSize / 2, unitCellSize], [0, unitCellSize / 2, unitCellSize], [unitCellSize / 2, unitCellSize, unitCellSize]
+    [unitCellSize / 2, 0, 0],
+    [unitCellSize, unitCellSize / 2, 0],
+    [0, unitCellSize / 2, 0],
+    [unitCellSize / 2, unitCellSize, 0],
+    [unitCellSize, 0, unitCellSize / 2],
+    [0, 0, unitCellSize / 2],
+    [0, unitCellSize, unitCellSize / 2],
+    [unitCellSize, unitCellSize, unitCellSize / 2],
+    [unitCellSize / 2, unitCellSize / 2, unitCellSize / 2],
+    [unitCellSize / 2, 0, unitCellSize],
+    [unitCellSize, unitCellSize / 2, unitCellSize],
+    [0, unitCellSize / 2, unitCellSize],
+    [unitCellSize / 2, unitCellSize, unitCellSize],
   ];
 
   let atoms: JSX.Element[] = [];
   if (type === "Cu") {
-    atoms = fccPoints.map((pos, i) => <Atom key={i} position={pos} color={colors.Cu} size={0.2} type="Cu" onClick={() => onSelect("Cu")} />);
+    atoms = fccPoints.map((pos, i) => (
+      <Atom
+        key={i}
+        position={pos}
+        color={colors.Cu}
+        size={0.2}
+        type="Cu"
+        onClick={() => onSelect("Cu")}
+      />
+    ));
   } else if (type === "NaCl" || type === "MgO") {
     const ionA = type === "NaCl" ? colors.Cl : colors.O;
     const ionB = type === "NaCl" ? colors.Na : colors.Mg;
@@ -45,17 +95,34 @@ const FCCStructure = ({ type, onSelect }: { type: "Cu" | "NaCl" | "MgO"; onSelec
 
     // Interweaving Lattice
     fccPoints.forEach((pos, i) => {
-      atoms.push(<Atom key={`A-${i}`} position={pos} color={ionA} size={0.2} type={ionAType} onClick={() => onSelect(ionAType)} />);
+      atoms.push(
+        <Atom
+          key={`A-${i}`}
+          position={pos}
+          color={ionA}
+          size={0.2}
+          type={ionAType}
+          onClick={() => onSelect(ionAType)}
+        />,
+      );
     });
 
     interweavingPoints.forEach((pos, i) => {
-      atoms.push(<Atom key={`B-${i}`} position={pos} color={ionB} size={0.1} type={ionBType} onClick={() => onSelect(ionBType)} />);
+      atoms.push(
+        <Atom
+          key={`B-${i}`}
+          position={pos}
+          color={ionB}
+          size={0.1}
+          type={ionBType}
+          onClick={() => onSelect(ionBType)}
+        />,
+      );
     });
   }
 
   return <>{atoms}</>;
 };
-
 
 const App = () => {
   const [structure, setStructure] = React.useState<"Cu" | "NaCl" | "MgO">("Cu");
