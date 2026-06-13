@@ -1,28 +1,20 @@
-# Simple lattice structures visualizer
+# simple lattice structures visualizer
 
-Select from 3 structures on the top left: Cu (fcc), NaCl (rocksalt), MgO (rocksalt).
+Interactive 3D crystal lattice viewer for Cu (FCC), NaCl (rocksalt), and MgO (rocksalt) unit cells.
 
-Drag to rotate the structure. Zoom in and out by scrolling.
+**Controls**
 
-Click on a sphere/ion to see its name on the top right.
+- Top left — pick a structure
+- Drag to rotate, scroll to zoom
+- Click an ion to identify it
+- Bottom left — switch display style
 
-## Available Scripts
+## Scripts
 
-In the project directory, you can run:
+```bash
+npm run dev      # http://localhost:3000
+npm run build
+npm run preview
+```
 
-### `npm start` or `npm run dev`
-
-Runs the app in development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-### `npm run build`
-
-Builds the app for production to the `dist` folder.
-
-### `npm run preview`
-
-Serves the production build locally for smoke testing.
-
-## CodeSandbox / Codespaces
-
-This project includes `.codesandbox/tasks.json` and `.devcontainer/devcontainer.json` so it can run in browser-based IDEs with the dev server on port 3000.
+Runs in CodeSandbox / Codespaces via `.codesandbox/tasks.json` and `.devcontainer/devcontainer.json`.
