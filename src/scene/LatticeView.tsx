@@ -13,7 +13,7 @@ type LatticeViewProps = {
 };
 
 export function LatticeView({ type }: LatticeViewProps) {
-  const { theme } = useViewer();
+  const { theme, setShowIonHint } = useViewer();
   const atoms = useMemo(() => getAtomsForStructure(type), [type]);
   const bondSegments = useMemo(
     () => (theme.effects.bonds ? getBondSegments(type, atoms) : []),
@@ -22,7 +22,7 @@ export function LatticeView({ type }: LatticeViewProps) {
   const unitCellEdges = useMemo(() => getUnitCellEdges(), []);
 
   return (
-    <>
+    <group onPointerMissed={() => setShowIonHint(false)}>
       {theme.effects.unitCellWireframe && (
         <UnitCellOutline
           segments={unitCellEdges}
@@ -40,6 +40,6 @@ export function LatticeView({ type }: LatticeViewProps) {
       {atoms.map((spec, i) => (
         <LatticeAtom key={i} spec={spec} />
       ))}
-    </>
+    </group>
   );
 }

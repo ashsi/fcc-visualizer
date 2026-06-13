@@ -8,6 +8,7 @@ import { Scene } from "./scene/Scene";
 import { BloomThermometer } from "./ui/BloomThermometer";
 import { CrtOverlay } from "./ui/CrtOverlay";
 import { Controls } from "./ui/Controls";
+import { IonCursorHint } from "./ui/IonCursorHint";
 import { IonReadout } from "./ui/IonReadout";
 import { ThemeToggle } from "./ui/ThemeToggle";
 
@@ -42,6 +43,7 @@ const App = () => {
     React.useState<ThemeMode>(getInitialThemeMode);
   const [bloomLevel, setBloomLevel] = React.useState(getInitialBloomLevel);
   const [selectedIon, setSelectedIon] = React.useState<string | null>(null);
+  const [showIonHint, setShowIonHint] = React.useState(false);
   const theme = getTheme(themeMode);
   const bloom = getBloomSettings(bloomLevel);
   const isLab = themeMode === "lab80s";
@@ -75,6 +77,7 @@ const App = () => {
         />
       )}
       <IonReadout ion={selectedIon} theme={theme} />
+      <IonCursorHint visible={showIonHint} themeClass={theme.id} />
       {theme.effects.scanlines && <CrtOverlay />}
 
       <Canvas
@@ -88,6 +91,8 @@ const App = () => {
           structure={structure}
           theme={theme}
           bloomLevel={bloomLevel}
+          selectedIon={selectedIon}
+          setShowIonHint={setShowIonHint}
           onSelect={setSelectedIon}
         />
       </Canvas>

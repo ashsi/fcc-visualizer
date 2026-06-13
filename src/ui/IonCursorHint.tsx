@@ -1,0 +1,40 @@
+import { useEffect, useState } from "react";
+
+type IonCursorHintProps = {
+  visible: boolean;
+  themeClass: string;
+};
+
+export function IonCursorHint({ visible, themeClass }: IonCursorHintProps) {
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    if (!visible) {
+      return;
+    }
+
+    const onMove = (event: MouseEvent) => {
+      setPosition({ x: event.clientX, y: event.clientY });
+    };
+
+    window.addEventListener("mousemove", onMove);
+    return () => window.removeEventListener("mousemove", onMove);
+  }, [visible]);
+
+  if (!visible) {
+    return null;
+  }
+
+  return (
+    <span
+      className={`ion-cursor-hint ion-cursor-hint--${themeClass}`}
+      style={{
+        left: position.x + 14,
+        top: position.y + 2,
+      }}
+      aria-hidden="true"
+    >
+      ?
+    </span>
+  );
+}

@@ -12,12 +12,14 @@ type LatticeAtomProps = {
 const HALO_SCALE = 1.6;
 
 export function LatticeAtom({ spec }: LatticeAtomProps) {
-  const { theme, bloomLevel, onSelect } = useViewer();
-  const ionStyle = theme.ions[spec.ion];
+  const { theme, bloomLevel, selectedIon, setShowIonHint, onSelect } =
+    useViewer();
   const materialRef = useRef<MeshStandardMaterial>(null);
+  const ionStyle = theme.ions[spec.ion];
   const isEmissive = theme.atom.material === "emissive";
   const bloom = getBloomSettings(bloomLevel);
   const baseIntensity = ionStyle.emissiveIntensity ?? 1;
+  const isUnselected = spec.label !== selectedIon;
 
   useFrame(({ clock }) => {
     if (!theme.atom.pulse || !materialRef.current || !isEmissive) {
@@ -35,7 +37,19 @@ export function LatticeAtom({ spec }: LatticeAtomProps) {
 
   return (
     <group position={spec.position}>
-      <mesh onClick={() => onSelect(spec.label)}>
+      <mesh
+        onClick={() => onSelect(spec.label)}
+        onPointerOver={(event) => {
+          event.stopPropagation();
+          setShowIonHint(isUnselected);
+          document.body.style.cursor = isUnselected ? "default" : "pointer";
+        }}
+        onPointerOut={(event) => {
+          event.stopPropagation();
+          setShowIonHint(false);
+          document.body.style.cursor = "default";
+        }}
+      >
         <sphereGeometry args={[spec.size, 32, 32]} />
         <meshStandardMaterial
           ref={materialRef}

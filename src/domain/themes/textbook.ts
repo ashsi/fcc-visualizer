@@ -4,11 +4,11 @@ export const textbookTheme: Theme = {
   id: "textbook",
   label: "Textbook",
   ions: {
-    Cu: { color: "orange" },
-    Na: { color: "grey" },
-    Cl: { color: "lightblue" },
-    Mg: { color: "red" },
-    O: { color: "white" },
+    Cu: { color: "#BA945F" },
+    Na: { color: "#9E8FBD" },
+    Cl: { color: "#52B878" },
+    Mg: { color: "#78AD62" },
+    O: { color: "#CC5555" },
   },
   scene: {
     background: "#ffffff",

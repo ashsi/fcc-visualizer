@@ -9,12 +9,29 @@ type SceneProps = {
   structure: StructureType;
   theme: Theme;
   bloomLevel: number;
+  selectedIon: string | null;
+  setShowIonHint: (show: boolean) => void;
   onSelect: (ion: string) => void;
 };
 
-export function Scene({ structure, theme, bloomLevel, onSelect }: SceneProps) {
+export function Scene({
+  structure,
+  theme,
+  bloomLevel,
+  selectedIon,
+  setShowIonHint,
+  onSelect,
+}: SceneProps) {
   return (
-    <ViewerProvider value={{ theme, bloomLevel, onSelect }}>
+    <ViewerProvider
+      value={{
+        theme,
+        bloomLevel,
+        selectedIon,
+        setShowIonHint,
+        onSelect,
+      }}
+    >
       <color attach="background" args={[theme.scene.background]} />
       {theme.scene.fog && (
         <fog

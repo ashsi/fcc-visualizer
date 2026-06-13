@@ -4,6 +4,8 @@ import type { Theme } from "../domain/types";
 type ViewerContextValue = {
   theme: Theme;
   bloomLevel: number;
+  selectedIon: string | null;
+  setShowIonHint: (show: boolean) => void;
   onSelect: (ion: string) => void;
 };
 
