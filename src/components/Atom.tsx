@@ -1,31 +1,39 @@
 import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import type { MeshStandardMaterial } from "three";
+import { getBloomSettings } from "../bloom";
 import type { AtomSpec } from "../types";
 import type { Theme } from "../themes/types";
 
 type AtomProps = {
   spec: AtomSpec;
   theme: Theme;
+  bloomLevel: number;
   onClick: () => void;
 };
 
 const HALO_SCALE = 1.6;
 
-export function Atom({ spec, theme, onClick }: AtomProps) {
+export function Atom({ spec, theme, bloomLevel, onClick }: AtomProps) {
   const ionStyle = theme.ions[spec.ion];
   const materialRef = useRef<MeshStandardMaterial>(null);
   const isEmissive = theme.atom.material === "emissive";
+  const bloom = getBloomSettings(bloomLevel);
+  const baseIntensity = ionStyle.emissiveIntensity ?? 1;
 
   useFrame(({ clock }) => {
     if (!theme.atom.pulse || !materialRef.current || !isEmissive) {
       return;
     }
 
-    const base = ionStyle.emissiveIntensity ?? 1;
+    const intensity = baseIntensity * bloom.emissiveScale;
     materialRef.current.emissiveIntensity =
-      base * (0.85 + 0.15 * Math.sin(clock.elapsedTime * 3));
+      intensity * (0.85 + 0.15 * Math.sin(clock.elapsedTime * 3));
   });
+
+  const emissiveIntensity = isEmissive
+    ? baseIntensity * bloom.emissiveScale
+    : 0;
 
   return (
     <group position={spec.position}>
@@ -33,21 +41,23 @@ export function Atom({ spec, theme, onClick }: AtomProps) {
         <sphereGeometry args={[spec.size, 32, 32]} />
         <meshStandardMaterial
           ref={materialRef}
-          color={ionStyle.color}
-          emissive={isEmissive ? (ionStyle.emissive ?? ionStyle.color) : "#000000"}
-          emissiveIntensity={
-            isEmissive ? (ionStyle.emissiveIntensity ?? 1) : 0
+          color={
+            isEmissive && bloom.emissiveOnly ? "#000000" : ionStyle.color
           }
+          emissive={isEmissive ? (ionStyle.emissive ?? ionStyle.color) : "#000000"}
+          emissiveIntensity={emissiveIntensity}
+          toneMapped={!(isEmissive && bloom.enabled)}
         />
       </mesh>
-      {theme.atom.showHalo && (
+      {theme.atom.showHalo && bloom.haloOpacity > 0.01 && (
         <mesh scale={HALO_SCALE}>
           <sphereGeometry args={[spec.size, 16, 16]} />
           <meshBasicMaterial
             color={ionStyle.emissive ?? ionStyle.color}
             transparent
-            opacity={0.12}
+            opacity={bloom.haloOpacity}
             depthWrite={false}
+            toneMapped={false}
           />
         </mesh>
       )}

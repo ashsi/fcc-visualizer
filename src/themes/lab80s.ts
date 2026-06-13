@@ -26,7 +26,7 @@ export const lab80sTheme: Theme = {
     readoutLabel: "ION LOCKED:",
   },
   effects: {
-    bloom: false,
+    bloom: true,
     scanlines: true,
     bonds: true,
     unitCellWireframe: true,

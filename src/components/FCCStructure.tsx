@@ -10,10 +10,16 @@ import { Bonds, UnitCellOutline } from "./LatticeLines";
 type FCCStructureProps = {
   type: StructureType;
   theme: Theme;
+  bloomLevel: number;
   onSelect: (ion: string) => void;
 };
 
-export function FCCStructure({ type, theme, onSelect }: FCCStructureProps) {
+export function FCCStructure({
+  type,
+  theme,
+  bloomLevel,
+  onSelect,
+}: FCCStructureProps) {
   const atoms = useMemo(() => getAtomsForStructure(type), [type]);
   const bondSegments = useMemo(
     () => (theme.effects.bonds ? getBondSegments(type, atoms) : []),
@@ -42,6 +48,7 @@ export function FCCStructure({ type, theme, onSelect }: FCCStructureProps) {
           key={i}
           spec={spec}
           theme={theme}
+          bloomLevel={bloomLevel}
           onClick={() => onSelect(spec.label)}
         />
       ))}

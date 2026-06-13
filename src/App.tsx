@@ -1,5 +1,8 @@
 import React from "react";
 import { Canvas } from "@react-three/fiber";
+import { ACESFilmicToneMapping, NoToneMapping } from "three";
+import { getBloomSettings } from "./bloom";
+import { BloomThermometer } from "./components/BloomThermometer";
 import { CrtOverlay } from "./components/CrtOverlay";
 import { Controls } from "./components/Controls";
 import { IonReadout } from "./components/IonReadout";
@@ -9,6 +12,7 @@ import { getTheme } from "./themes";
 import type { StructureType, ThemeMode } from "./types";
 
 const THEME_STORAGE_KEY = "fcc-visualizer-theme";
+const BLOOM_STORAGE_KEY = "fcc-visualizer-bloom";
 
 function getInitialThemeMode(): ThemeMode {
   const stored = localStorage.getItem(THEME_STORAGE_KEY);
@@ -18,12 +22,29 @@ function getInitialThemeMode(): ThemeMode {
   return "textbook";
 }
 
+function getInitialBloomLevel(): number {
+  const stored = localStorage.getItem(BLOOM_STORAGE_KEY);
+  if (!stored) {
+    return 0;
+  }
+
+  const level = Number(stored);
+  if (Number.isFinite(level) && level >= 0 && level <= 100) {
+    return level;
+  }
+
+  return 0;
+}
+
 const App = () => {
   const [structure, setStructure] = React.useState<StructureType>("Cu");
   const [themeMode, setThemeMode] =
     React.useState<ThemeMode>(getInitialThemeMode);
+  const [bloomLevel, setBloomLevel] = React.useState(getInitialBloomLevel);
   const [selectedIon, setSelectedIon] = React.useState<string | null>(null);
   const theme = getTheme(themeMode);
+  const bloom = getBloomSettings(bloomLevel);
+  const isLab = themeMode === "lab80s";
 
   return (
     <div
@@ -44,13 +65,29 @@ const App = () => {
           localStorage.setItem(THEME_STORAGE_KEY, nextThemeMode);
         }}
       />
+      {isLab && (
+        <BloomThermometer
+          bloomLevel={bloomLevel}
+          onBloomChange={(level) => {
+            setBloomLevel(level);
+            localStorage.setItem(BLOOM_STORAGE_KEY, String(level));
+          }}
+        />
+      )}
       <IonReadout ion={selectedIon} theme={theme} />
       {theme.effects.scanlines && <CrtOverlay />}
 
-      <Canvas eventSource={document.body}>
+      <Canvas
+        eventSource={document.body}
+        gl={{
+          toneMapping:
+            isLab && bloom.enabled ? NoToneMapping : ACESFilmicToneMapping,
+        }}
+      >
         <Scene
           structure={structure}
           theme={theme}
+          bloomLevel={bloomLevel}
           onSelect={setSelectedIon}
         />
       </Canvas>
