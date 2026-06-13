@@ -14,7 +14,7 @@ type AtomProps = {
 
 const HALO_SCALE = 1.6;
 
-export function Atom({ spec, theme, bloomLevel, onClick }: AtomProps) {
+export function LatticeAtom({ spec, theme, bloomLevel, onClick }: AtomProps) {
   const ionStyle = theme.ions[spec.ion];
   const materialRef = useRef<MeshStandardMaterial>(null);
   const isEmissive = theme.atom.material === "emissive";

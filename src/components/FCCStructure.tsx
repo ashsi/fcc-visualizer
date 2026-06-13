@@ -4,7 +4,7 @@ import { getAtomsForStructure } from "../lattice/structures";
 import { getUnitCellEdges } from "../lattice/unitCell";
 import type { StructureType } from "../types";
 import type { Theme } from "../themes/types";
-import { Atom } from "./Atom";
+import { LatticeAtom } from "./LatticeAtom";
 import { Bonds, UnitCellOutline } from "./LatticeLines";
 
 type FCCStructureProps = {
@@ -44,7 +44,7 @@ export function FCCStructure({
         />
       )}
       {atoms.map((spec, i) => (
-        <Atom
+        <LatticeAtom
           key={i}
           spec={spec}
           theme={theme}
