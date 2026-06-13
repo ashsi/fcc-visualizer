@@ -1,20 +1,18 @@
 import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import type { MeshStandardMaterial } from "three";
-import { getBloomSettings } from "../bloom";
-import type { AtomSpec } from "../types";
-import type { Theme } from "../themes/types";
+import { getBloomSettings } from "../domain/bloom";
+import type { AtomSpec } from "../domain/types";
+import { useViewer } from "./ViewerContext";
 
-type AtomProps = {
+type LatticeAtomProps = {
   spec: AtomSpec;
-  theme: Theme;
-  bloomLevel: number;
-  onClick: () => void;
 };
 
 const HALO_SCALE = 1.6;
 
-export function LatticeAtom({ spec, theme, bloomLevel, onClick }: AtomProps) {
+export function LatticeAtom({ spec }: LatticeAtomProps) {
+  const { theme, bloomLevel, onSelect } = useViewer();
   const ionStyle = theme.ions[spec.ion];
   const materialRef = useRef<MeshStandardMaterial>(null);
   const isEmissive = theme.atom.material === "emissive";
@@ -37,7 +35,7 @@ export function LatticeAtom({ spec, theme, bloomLevel, onClick }: AtomProps) {
 
   return (
     <group position={spec.position}>
-      <mesh onClick={onClick}>
+      <mesh onClick={() => onSelect(spec.label)}>
         <sphereGeometry args={[spec.size, 32, 32]} />
         <meshStandardMaterial
           ref={materialRef}

@@ -1,5 +1,4 @@
-import type { ThemeMode } from "../types";
-import type { Theme } from "./types";
+import type { Theme, ThemeMode } from "../types";
 import { lab80sTheme } from "./lab80s";
 import { textbookTheme } from "./textbook";
 

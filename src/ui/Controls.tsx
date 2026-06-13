@@ -1,4 +1,4 @@
-import type { StructureType } from "../types";
+import type { StructureType } from "../domain/types";
 
 type ControlsProps = {
   structure: StructureType;

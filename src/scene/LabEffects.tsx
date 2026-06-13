@@ -1,14 +1,12 @@
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
-import { getBloomSettings } from "../bloom";
+import { getBloomSettings } from "../domain/bloom";
+import { useViewer } from "./ViewerContext";
 
-type LabEffectsProps = {
-  bloomLevel: number;
-};
-
-export function LabEffects({ bloomLevel }: LabEffectsProps) {
+export function LabEffects() {
+  const { theme, bloomLevel } = useViewer();
   const bloom = getBloomSettings(bloomLevel);
 
-  if (!bloom.enabled) {
+  if (!theme.effects.bloom || !bloom.enabled) {
     return null;
   }
 

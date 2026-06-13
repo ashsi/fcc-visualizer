@@ -1,15 +1,15 @@
 import React from "react";
 import { Canvas } from "@react-three/fiber";
 import { ACESFilmicToneMapping, NoToneMapping } from "three";
-import { getBloomSettings } from "./bloom";
-import { BloomThermometer } from "./components/BloomThermometer";
-import { CrtOverlay } from "./components/CrtOverlay";
-import { Controls } from "./components/Controls";
-import { IonReadout } from "./components/IonReadout";
-import { Scene } from "./components/Scene";
-import { ThemeToggle } from "./components/ThemeToggle";
-import { getTheme } from "./themes";
-import type { StructureType, ThemeMode } from "./types";
+import { getBloomSettings } from "./domain/bloom";
+import { getTheme } from "./domain/themes";
+import type { StructureType, ThemeMode } from "./domain/types";
+import { Scene } from "./scene/Scene";
+import { BloomThermometer } from "./ui/BloomThermometer";
+import { CrtOverlay } from "./ui/CrtOverlay";
+import { Controls } from "./ui/Controls";
+import { IonReadout } from "./ui/IonReadout";
+import { ThemeToggle } from "./ui/ThemeToggle";
 
 const THEME_STORAGE_KEY = "fcc-visualizer-theme";
 const BLOOM_STORAGE_KEY = "fcc-visualizer-bloom";

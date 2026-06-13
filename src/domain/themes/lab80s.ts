@@ -1,4 +1,4 @@
-import type { Theme } from "./types";
+import type { Theme } from "../types";
 
 export const lab80sTheme: Theme = {
   id: "lab80s",

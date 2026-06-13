@@ -1,4 +1,4 @@
-import type { Theme } from "../themes/types";
+import type { Theme } from "../domain/types";
 
 type IonReadoutProps = {
   ion: string | null;

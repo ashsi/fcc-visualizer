@@ -1,5 +1,5 @@
-import type { ThemeMode } from "../types";
-import { THEME_OPTIONS } from "../themes";
+import type { ThemeMode } from "../domain/types";
+import { THEME_OPTIONS } from "../domain/themes";
 
 type ThemeToggleProps = {
   themeMode: ThemeMode;

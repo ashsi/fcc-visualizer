@@ -1,25 +1,19 @@
 import { useMemo } from "react";
-import { getBondSegments } from "../lattice/bonds";
-import { getAtomsForStructure } from "../lattice/structures";
-import { getUnitCellEdges } from "../lattice/unitCell";
-import type { StructureType } from "../types";
-import type { Theme } from "../themes/types";
+import { getBondSegments } from "../domain/lattice/bonds";
+import { getAtomsForStructure } from "../domain/lattice/structures";
+import { getUnitCellEdges } from "../domain/lattice/unitCell";
+import type { StructureType } from "../domain/types";
+import { BondLines } from "./BondLines";
 import { LatticeAtom } from "./LatticeAtom";
-import { Bonds, UnitCellOutline } from "./LatticeLines";
+import { UnitCellOutline } from "./UnitCellOutline";
+import { useViewer } from "./ViewerContext";
 
-type FCCStructureProps = {
+type LatticeViewProps = {
   type: StructureType;
-  theme: Theme;
-  bloomLevel: number;
-  onSelect: (ion: string) => void;
 };
 
-export function FCCStructure({
-  type,
-  theme,
-  bloomLevel,
-  onSelect,
-}: FCCStructureProps) {
+export function LatticeView({ type }: LatticeViewProps) {
+  const { theme } = useViewer();
   const atoms = useMemo(() => getAtomsForStructure(type), [type]);
   const bondSegments = useMemo(
     () => (theme.effects.bonds ? getBondSegments(type, atoms) : []),
@@ -37,20 +31,14 @@ export function FCCStructure({
         />
       )}
       {theme.effects.bonds && (
-        <Bonds
+        <BondLines
           segments={bondSegments}
           color={theme.effects.bondColor}
           pulse={theme.effects.bondPulse}
         />
       )}
       {atoms.map((spec, i) => (
-        <LatticeAtom
-          key={i}
-          spec={spec}
-          theme={theme}
-          bloomLevel={bloomLevel}
-          onClick={() => onSelect(spec.label)}
-        />
+        <LatticeAtom key={i} spec={spec} />
       ))}
     </>
   );

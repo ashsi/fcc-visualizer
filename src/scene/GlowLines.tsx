@@ -5,9 +5,9 @@ import {
   BufferGeometry,
   LineBasicMaterial,
 } from "three";
-import type { BondSegment } from "../lattice/bonds";
+import type { BondSegment } from "../domain/lattice/bonds";
 
-type LineSegmentsProps = {
+type GlowLinesProps = {
   segments: BondSegment[];
   color: string;
   opacity: number;
@@ -32,7 +32,7 @@ function segmentsToGeometry(segments: BondSegment[]): BufferGeometry {
   return geometry;
 }
 
-function GlowLines({ segments, color, opacity, pulse }: LineSegmentsProps) {
+export function GlowLines({ segments, color, opacity, pulse }: GlowLinesProps) {
   const materialRef = useRef<LineBasicMaterial>(null);
   const geometry = useMemo(
     () => segmentsToGeometry(segments),
@@ -57,35 +57,5 @@ function GlowLines({ segments, color, opacity, pulse }: LineSegmentsProps) {
         opacity={opacity}
       />
     </lineSegments>
-  );
-}
-
-type BondsProps = {
-  segments: BondSegment[];
-  color: string;
-  pulse: boolean;
-};
-
-export function Bonds({ segments, color, pulse }: BondsProps) {
-  if (segments.length === 0) {
-    return null;
-  }
-
-  return <GlowLines segments={segments} color={color} opacity={0.55} pulse={pulse} />;
-}
-
-type UnitCellOutlineProps = {
-  segments: BondSegment[];
-  color: string;
-  pulse: boolean;
-};
-
-export function UnitCellOutline({
-  segments,
-  color,
-  pulse,
-}: UnitCellOutlineProps) {
-  return (
-    <GlowLines segments={segments} color={color} opacity={0.35} pulse={pulse} />
   );
 }

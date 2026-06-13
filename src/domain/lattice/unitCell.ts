@@ -1,5 +1,5 @@
-import { UNIT_CELL_SIZE } from "./constants";
 import type { BondSegment } from "./bonds";
+import { UNIT_CELL_SIZE } from "./constants";
 
 export function getUnitCellEdges(): BondSegment[] {
   const s = UNIT_CELL_SIZE;
