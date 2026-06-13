@@ -29,5 +29,8 @@ export const textbookTheme: Theme = {
     scanlines: false,
     bonds: false,
     unitCellWireframe: false,
+    bondColor: "#888888",
+    wireframeColor: "#cccccc",
+    bondPulse: false,
   },
 };

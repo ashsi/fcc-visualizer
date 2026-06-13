@@ -28,7 +28,10 @@ export const lab80sTheme: Theme = {
   effects: {
     bloom: false,
     scanlines: true,
-    bonds: false,
-    unitCellWireframe: false,
+    bonds: true,
+    unitCellWireframe: true,
+    bondColor: "#00ffff",
+    wireframeColor: "#cc66ff",
+    bondPulse: true,
   },
 };

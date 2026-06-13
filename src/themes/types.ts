@@ -30,5 +30,8 @@ export type Theme = {
     scanlines: boolean;
     bonds: boolean;
     unitCellWireframe: boolean;
+    bondColor: string;
+    wireframeColor: string;
+    bondPulse: boolean;
   };
 };
