@@ -14,6 +14,16 @@ export function Scene({ structure, theme, onSelect }: SceneProps) {
   return (
     <>
       <color attach="background" args={[theme.scene.background]} />
+      {theme.scene.fog && (
+        <fog
+          attach="fog"
+          args={[
+            theme.scene.fog.color,
+            theme.scene.fog.near,
+            theme.scene.fog.far,
+          ]}
+        />
+      )}
       <ambientLight intensity={theme.scene.ambientIntensity} />
       <pointLight
         position={theme.scene.pointLight.position}

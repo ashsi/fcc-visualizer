@@ -11,7 +11,7 @@ export const textbookTheme: Theme = {
     O: { color: "white" },
   },
   scene: {
-    background: "#000000",
+    background: "#ffffff",
     ambientIntensity: 0.5,
     pointLight: { position: [5, 5, 5], intensity: 1 },
   },

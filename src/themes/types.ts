@@ -14,6 +14,7 @@ export type Theme = {
     background: string;
     ambientIntensity: number;
     pointLight: { position: [number, number, number]; intensity: number };
+    fog?: { color: string; near: number; far: number };
   };
   atom: {
     material: "standard" | "emissive";
