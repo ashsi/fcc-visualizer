@@ -9,6 +9,14 @@ Interactive 3D crystal lattice viewer for Cu (FCC), NaCl (rocksalt), and MgO (ro
 - Click an ion to identify it
 - Bottom left — switch display style
 
+## Features
+
+Raycast picking, hand-built line BufferGeometry, HDR-emissive + bloom with tone-mapping disabled, data-driven theming
+
+## Screenshot
+
+![80's lab theme](/lab_example.png)
+
 ## Scripts
 
 ```bash
