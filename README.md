@@ -15,7 +15,7 @@ Raycast picking, hand-built line BufferGeometry, HDR-emissive + bloom with tone-
 
 ## Screenshot
 
-![80's lab theme](/lab_example.png)
+![80's lab theme](/lab_screenshot.png)
 
 ## Scripts
 
