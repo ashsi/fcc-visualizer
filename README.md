@@ -9,6 +9,10 @@ Interactive 3D crystal lattice viewer for Cu (FCC), NaCl (rocksalt), and MgO (ro
 - Click an ion to identify it
 - Bottom left — switch display style
 
+## Deployment
+
+[Live demo](https://fcc-visualizer.vercel.app/)
+
 ## Features
 
 Raycast picking, hand-built line BufferGeometry, HDR-emissive + bloom with tone-mapping disabled, data-driven theming
