@@ -19,11 +19,11 @@ Raycast picking, hand-built line BufferGeometry, HDR-emissive + bloom with tone-
 
 ## Desktop Screenshot
 
-![80's lab theme](/lab_screenshot.png)
+<img src="lab_screenshot.png" alt="80's lab theme" width="600">
 
 ## Mobile Screenshot
 
-![Textbook theme](/textbook_screenshot_mobile.png)
+<img src="textbook_screenshot_mobile.png" alt="Textbook theme" width="300">
 
 ## Scripts
 
