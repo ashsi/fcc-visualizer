@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { getBondSegments } from "../domain/lattice/bonds";
+import { LATTICE_CENTER_OFFSET } from "../domain/lattice/constants";
 import { getAtomsForStructure } from "../domain/lattice/structures";
 import { getUnitCellEdges } from "../domain/lattice/unitCell";
 import type { StructureType } from "../domain/types";
@@ -22,7 +23,7 @@ export function LatticeView({ type }: LatticeViewProps) {
   const unitCellEdges = useMemo(() => getUnitCellEdges(), []);
 
   return (
-    <group onPointerMissed={() => setShowIonHint(false)}>
+    <group position={LATTICE_CENTER_OFFSET} onPointerMissed={() => setShowIonHint(false)}>
       {theme.effects.unitCellWireframe && (
         <UnitCellOutline
           segments={unitCellEdges}

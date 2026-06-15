@@ -1,5 +1,14 @@
 export const UNIT_CELL_SIZE = 1.5;
 
+export const LATTICE_CENTER = UNIT_CELL_SIZE / 2;
+
+/** Shift domain coords (0…UNIT_CELL_SIZE) so the unit cell is centred on the origin. */
+export const LATTICE_CENTER_OFFSET: [number, number, number] = [
+  -LATTICE_CENTER,
+  -LATTICE_CENTER,
+  -LATTICE_CENTER,
+];
+
 export const FCC_POINTS: [number, number, number][] = [
   [0, 0, 0],
   [UNIT_CELL_SIZE, 0, 0],
