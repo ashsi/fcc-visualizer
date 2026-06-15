@@ -187,6 +187,13 @@
   font-weight: 600;
   line-height: 1;
   user-select: none;
+  transform: translate(14px, 2px);
+}
+
+@media (pointer: coarse) {
+  .ion-cursor-hint {
+    transform: translate(16px, -44px);
+  }
 }
 
 .ion-cursor-hint--textbook {

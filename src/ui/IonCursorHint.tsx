@@ -33,8 +33,8 @@ export function IonCursorHint({ visible, themeClass }: IonCursorHintProps) {
     <span
       className={`ion-cursor-hint ion-cursor-hint--${themeClass}`}
       style={{
-        left: position.x + 14,
-        top: position.y + 2,
+        left: position.x,
+        top: position.y,
       }}
       aria-hidden="true"
     >
