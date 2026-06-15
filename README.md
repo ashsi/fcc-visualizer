@@ -2,7 +2,7 @@
 
 Interactive 3D crystal lattice viewer for Cu (FCC), NaCl (rocksalt), and MgO (rocksalt) unit cells.
 
-**Controls**
+**Desktop Controls**
 
 - Top left — pick a structure
 - Drag to rotate, scroll to zoom
