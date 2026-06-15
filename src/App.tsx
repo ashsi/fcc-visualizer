@@ -4,6 +4,7 @@ import { ACESFilmicToneMapping, NoToneMapping } from "three";
 import { getBloomSettings } from "./domain/bloom";
 import { getTheme } from "./domain/themes";
 import type { StructureType, ThemeMode } from "./domain/types";
+import { usePreventBrowserZoom } from "./hooks/usePreventBrowserZoom";
 import { Scene } from "./scene/Scene";
 import { BloomThermometer } from "./ui/BloomThermometer";
 import { CrtOverlay } from "./ui/CrtOverlay";
@@ -38,6 +39,8 @@ function getInitialBloomLevel(): number {
 }
 
 const App = () => {
+  usePreventBrowserZoom();
+
   const [structure, setStructure] = React.useState<StructureType>("Cu");
   const [themeMode, setThemeMode] =
     React.useState<ThemeMode>(getInitialThemeMode);
@@ -51,7 +54,7 @@ const App = () => {
   return (
     <div
       className={theme.ui.rootClass}
-      style={{ width: "100vw", height: "100vh" }}
+      style={{ width: "100%", height: "100%" }}
     >
       <Controls
         structure={structure}
