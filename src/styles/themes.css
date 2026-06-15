@@ -16,7 +16,7 @@
 }
 
 .structure-selector__label {
-  font-size: 12px;
+  font-size: var(--ui-font-label);
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
@@ -27,7 +27,7 @@
   border: 1px solid #555;
   background: #fff;
   color: #111;
-  font-size: 14px;
+  font-size: var(--ui-font-body);
   cursor: pointer;
 }
 
@@ -43,7 +43,7 @@
 }
 
 .theme-toggle__label {
-  font-size: 12px;
+  font-size: var(--ui-font-label);
   letter-spacing: 0.04em;
   text-transform: uppercase;
   opacity: 0.5;
@@ -83,7 +83,7 @@
 }
 
 .ion-readout {
-  font-size: 14px;
+  font-size: var(--ui-font-body);
   position: absolute;
   top: 20px;
   right: 40px;
@@ -92,6 +92,12 @@
   padding: 10px;
   border-radius: 5px;
   z-index: 10;
+}
+
+.theme-textbook,
+.theme-lab80s {
+  --ui-font-label: 12px;
+  --ui-font-body: 14px;
 }
 
 .theme-textbook .structure-selector__label,
@@ -113,13 +119,7 @@
 
 .theme-lab80s {
   font-family: ui-monospace, "Cascadia Code", "Courier New", monospace;
-}
-
-.theme-lab80s .structure-selector__label,
-.theme-lab80s .theme-toggle__label,
-.theme-lab80s .bloom-thermometer__label,
-.theme-lab80s .bloom-thermometer__value {
-  font-size: 14px;
+  font-size-adjust: 0.49;
 }
 
 .theme-lab80s .structure-selector__label,
@@ -224,7 +224,7 @@
 }
 
 .bloom-thermometer__label {
-  font-size: 12px;
+  font-size: var(--ui-font-label);
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
@@ -278,7 +278,7 @@
 }
 
 .bloom-thermometer__value {
-  font-size: 12px;
+  font-size: var(--ui-font-label);
   font-variant-numeric: tabular-nums;
   min-width: 2ch;
   text-align: center;
@@ -309,6 +309,12 @@
 }
 
 @media (max-width: 540px) {
+  .theme-textbook,
+  .theme-lab80s {
+    --ui-font-label: 14px;
+    --ui-font-body: 14px;
+  }
+
   .structure-selector {
     top: 12px;
     left: 12px;
@@ -320,7 +326,6 @@
     width: auto;
     max-width: 100%;
     box-sizing: border-box;
-    font-size: 13px;
     padding: 8px;
     field-sizing: content;
   }
@@ -345,10 +350,6 @@
   .theme-toggle__slider {
     width: min(100px, 28vw);
     flex-shrink: 0;
-  }
-
-  .theme-toggle__label {
-    font-size: 10px;
   }
 
   .bloom-thermometer {
