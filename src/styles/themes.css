@@ -1,4 +1,4 @@
-.controls {
+.structure-selector {
   position: absolute;
   top: 20px;
   left: 40px;
@@ -9,19 +9,19 @@
   pointer-events: auto;
 }
 
-.controls__field {
+.structure-selector__field {
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
 
-.controls__label {
+.structure-selector__label {
   font-size: 12px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 
-.controls__select {
+.structure-selector__select {
   padding: 10px;
   border-radius: 4px;
   border: 1px solid #555;
@@ -94,7 +94,7 @@
   z-index: 10;
 }
 
-.theme-textbook .controls__label,
+.theme-textbook .structure-selector__label,
 .theme-textbook .theme-toggle__label {
   color: #333;
 }
@@ -115,20 +115,20 @@
   font-family: ui-monospace, "Cascadia Code", "Courier New", monospace;
 }
 
-.theme-lab80s .controls__label,
+.theme-lab80s .structure-selector__label,
 .theme-lab80s .theme-toggle__label,
 .theme-lab80s .bloom-thermometer__label,
 .theme-lab80s .bloom-thermometer__value {
   font-size: 14px;
 }
 
-.theme-lab80s .controls__label,
+.theme-lab80s .structure-selector__label,
 .theme-lab80s .theme-toggle__label {
   color: #39ff14;
   text-shadow: 0 0 6px rgba(57, 255, 20, 0.5);
 }
 
-.theme-lab80s .controls__select {
+.theme-lab80s .structure-selector__select {
   background: #0a0a12;
   color: #39ff14;
   border: 1px solid #39ff14;
@@ -136,7 +136,7 @@
   box-shadow: 0 0 8px rgba(57, 255, 20, 0.15);
 }
 
-.theme-lab80s .controls__select:focus {
+.theme-lab80s .structure-selector__select:focus {
   outline: none;
   box-shadow: 0 0 12px rgba(57, 255, 20, 0.35);
 }
@@ -309,14 +309,14 @@
 }
 
 @media (max-width: 540px) {
-  .controls {
+  .structure-selector {
     top: 12px;
     left: 12px;
     width: fit-content;
     max-width: calc(100% - 24px);
   }
 
-  .controls__select {
+  .structure-selector__select {
     width: auto;
     max-width: 100%;
     box-sizing: border-box;
@@ -363,7 +363,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .theme-lab80s .controls__select,
+  .theme-lab80s .structure-selector__select,
   .theme-lab80s .ion-readout,
   .theme-lab80s .theme-toggle__label,
   .theme-lab80s .bloom-thermometer__label,

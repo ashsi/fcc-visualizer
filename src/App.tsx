@@ -8,7 +8,7 @@ import { usePreventBrowserZoom } from "./hooks/usePreventBrowserZoom";
 import { Scene } from "./scene/Scene";
 import { BloomThermometer } from "./ui/BloomThermometer";
 import { CrtOverlay } from "./ui/CrtOverlay";
-import { Controls } from "./ui/Controls";
+import { StructureSelector } from "./ui/StructureSelector";
 import { IonCursorHint } from "./ui/IonCursorHint";
 import { IonReadout } from "./ui/IonReadout";
 import { ThemeToggle } from "./ui/ThemeToggle";
@@ -56,7 +56,7 @@ const App = () => {
       className={theme.ui.rootClass}
       style={{ width: "100%", height: "100%" }}
     >
-      <Controls
+      <StructureSelector
         structure={structure}
         onStructureChange={(nextStructure) => {
           setStructure(nextStructure);
