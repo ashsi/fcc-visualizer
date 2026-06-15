@@ -301,6 +301,60 @@
   box-shadow: 0 0 12px rgba(255, 136, 0, 0.6);
 }
 
+@media (max-width: 540px) {
+  .controls {
+    top: 12px;
+    left: 12px;
+    width: fit-content;
+    max-width: calc(100% - 24px);
+  }
+
+  .controls__select {
+    width: auto;
+    max-width: 100%;
+    box-sizing: border-box;
+    font-size: 13px;
+    padding: 8px;
+    field-sizing: content;
+  }
+
+  .ion-readout {
+    top: 76px;
+    left: 12px;
+    width: fit-content;
+    max-width: calc(100% - 24px);
+    box-sizing: border-box;
+  }
+
+  .theme-toggle {
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .theme-toggle__slider {
+    width: min(100px, 28vw);
+    flex-shrink: 0;
+  }
+
+  .theme-toggle__label {
+    font-size: 10px;
+  }
+
+  .bloom-thermometer {
+    bottom: 64px;
+    right: 12px;
+  }
+
+  .bloom-thermometer__gauge {
+    height: 100px;
+    width: 24px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .theme-lab80s .controls__select,
   .theme-lab80s .ion-readout,

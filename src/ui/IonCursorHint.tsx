@@ -13,12 +13,16 @@ export function IonCursorHint({ visible, themeClass }: IonCursorHintProps) {
       return;
     }
 
-    const onMove = (event: MouseEvent) => {
+    const onMove = (event: PointerEvent) => {
       setPosition({ x: event.clientX, y: event.clientY });
     };
 
-    window.addEventListener("mousemove", onMove);
-    return () => window.removeEventListener("mousemove", onMove);
+    window.addEventListener("pointermove", onMove);
+    window.addEventListener("pointerdown", onMove);
+    return () => {
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerdown", onMove);
+    };
   }, [visible]);
 
   if (!visible) {
