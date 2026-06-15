@@ -17,9 +17,13 @@ Interactive 3D crystal lattice viewer for Cu (FCC), NaCl (rocksalt), and MgO (ro
 
 Raycast picking, hand-built line BufferGeometry, HDR-emissive + bloom with tone-mapping disabled, data-driven theming
 
-## Screenshot
+## Desktop Screenshot
 
 ![80's lab theme](/lab_screenshot.png)
+
+## Mobile Screenshot
+
+![Textbook theme](/textbook_screenshot_mobile.png)
 
 ## Scripts
 
